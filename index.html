@@ -44,9 +44,10 @@
             margin-top: 10px;
         }
         .instagram-link {
+            position: fixed;
+            top: 10px;
+            right: 10px;
             font-size: 18px;
-            margin-top: 10px;
-            position: absolute;
             z-index: 3;
         }
         .instagram-link a {
@@ -114,12 +115,13 @@
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
         </div>
-        <div class="instagram-link">
-            <a href="https://www.instagram.com/ardaa.b7?igsh=MTJucW05Mnlma3I4MQ==" target="_blank">Instagram</a>
-        </div>
     </div>
     <button class="confetti-start" onclick="startConfetti()">Konfeti Patlat</button>
     <div class="confetti" id="confetti"></div>
+
+    <div class="instagram-link">
+        <a href="https://www.instagram.com/ardaa.b7?igsh=MTJucW05Mnlma3I4MQ==" target="_blank">Instagram</a>
+    </div>
 
     <script>
         function startConfetti() {
