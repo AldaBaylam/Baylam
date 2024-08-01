@@ -36,10 +36,11 @@
         }
         .content h2 {
             margin: 0;
-            font-size: 24px;
+            font-size: 36px;
+            font-weight: bold;
         }
         .instagram-link {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 18px;
         }
         .instagram-link a {
@@ -112,6 +113,11 @@
                 piece.style.animationDelay = `${Math.random() * 3}s`;
                 confettiContainer.appendChild(piece);
             }
+
+            // Stop confetti after 7 seconds
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+            }, 7000);
         }
     </script>
 </body>
