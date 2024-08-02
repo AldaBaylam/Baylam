@@ -28,23 +28,10 @@
             font-size: 16px;
         }
         .message {
-            position: fixed;
-            top: 20px;
-            left: 0;
-            width: 100%;
             font-size: 36px;
             font-weight: bold;
             color: #ff1493;
-            z-index: 1;
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 100px); /* Header ve sohbet kutusu yüksekliği */
-            position: relative;
-            z-index: 1;
+            margin-top: 100px;
         }
         .heart {
             margin-top: 10px;
@@ -64,52 +51,6 @@
         .instagram-link a:hover {
             text-decoration: underline;
         }
-        .surprise {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.8);
-            font-size: 48px;
-            font-weight: bold;
-            color: #ff1493;
-            opacity: 0;
-            transition: opacity 1s ease;
-            z-index: 1;
-        }
-        .show {
-            opacity: 1;
-        }
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: twinkle 1.5s infinite;
-        }
-        @keyframes twinkle {
-            0%, 100% {
-                opacity: 0.7;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5);
-            }
-        }
         .container {
             position: absolute;
             top: 0;
@@ -119,6 +60,29 @@
             background: transparent;
             z-index: 0;
         }
+        .heart-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://image.shutterstock.com/image-vector/red-heart-isolated-on-white-260nw-1594974075.jpg') no-repeat center;
+            background-size: contain;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body onclick="showSurprise()">
@@ -126,50 +90,32 @@
         <h1>by AldaBaylam</h1>
     </div>
     <div class="message">
-        Seni Seviyorum Zelalim ❤️
-    </div>
-    <div class="content">
-        <div class="heart">
-            <!-- SVG Kalp Çizimi -->
-            <svg width="50" height="45" viewBox="0 0 24 24" fill="red" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-        </div>
+        Seni Seviyorum Zelalim 
     </div>
     <div class="instagram-link">
         <a href="https://www.instagram.com/ardaa.b7?igshid=MTJucW05Mnlma3I4MQ==" target="_blank">Instagram</a>
     </div>
-    <div id="surprise" class="surprise">
-        💖 Senin İçin! 💖
-    </div>
-    <div id="stars" class="stars"></div>
+    <div id="heartRain" class="heart-rain"></div>
     <div class="container"></div>
 
     <script>
         function showSurprise() {
-            const surprise = document.getElementById('surprise');
-            surprise.classList.add('show');
-            setTimeout(() => {
-                surprise.classList.remove('show');
-            }, 3000); // 3 saniye sonra surprizi kaldır
+            createHeartRain();
         }
 
-        // Yıldız animasyonunu ekleyin
-        function createStars() {
-            const starContainer = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = `${Math.random() * 3 + 1}px`;
-                star.style.height = star.style.width;
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.left = `${Math.random() * 100}vw`;
-                star.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                starContainer.appendChild(star);
+        function createHeartRain() {
+            const heartRain = document.getElementById('heartRain');
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+                heartRain.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
             }
         }
-
-        createStars();
     </script>
 </body>
 </html>
