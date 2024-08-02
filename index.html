@@ -10,7 +10,7 @@
             padding: 0;
             font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
-            background: #ffb6c1;
+            background: linear-gradient(to bottom right, #ffb6c1, #ff69b4);
             overflow: hidden;
             cursor: pointer;
         }
@@ -41,9 +41,11 @@
             font-size: 48px;
             font-weight: bold;
             color: #ff1493;
+            cursor: pointer;
         }
         .heart {
             margin-top: 10px;
+            cursor: pointer;
         }
         .instagram-link {
             position: fixed;
@@ -82,15 +84,39 @@
                 opacity: 0;
             }
         }
+        .glowing {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            pointer-events: none;
+            z-index: 0;
+        }
+        .message-box {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+        .message-box h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #ff1493;
+        }
     </style>
 </head>
-<body onclick="createEmojis()">
+<body>
     <div class="header">
         <h1>by AldaBaylam</h1>
     </div>
     <div class="content">
-        <h2>Seni Seviyorum Zelalim</h2>
-        <div class="heart">
+        <h2 onclick="createEmojis()">Seni Seviyorum Zelalim</h2>
+        <div class="heart" onclick="createEmojis()">
             <!-- SVG Kalp Çizimi -->
             <svg width="50" height="45" viewBox="0 0 24 24" fill="red" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -101,8 +127,20 @@
         <a href="https://www.instagram.com/ardaa.b7?igsh=MTJucW05Mnlma3I4MQ==" target="_blank">Instagram</a>
     </div>
     <div class="emojis" id="emojis"></div>
+    <div class="glowing"></div>
+    <div class="message-box">
+        <h3>Zelal'e Özel Mesaj: Seni her şeyden çok seviyorum!</h3>
+    </div>
+    <audio id="background-music" loop>
+        <source src="path_to_your_romantic_song.mp3" type="audio/mp3">
+    </audio>
 
     <script>
+        document.body.onload = function() {
+            const audio = document.getElementById('background-music');
+            audio.play();
+        };
+
         function createEmojis() {
             const emojisContainer = document.getElementById('emojis');
             const emojiList = ['❤️', '😍', '🥰', '😘', '💖', '💘', '💕', '💓', '💗', '💞', '❤️‍🩹', '🫦', '❤️‍🔥', '💋', '🫶', '😻', '🤩'];
