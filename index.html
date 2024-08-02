@@ -8,10 +8,11 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
-            background: #fff;
+            background: #ffb6c1;
             overflow: hidden;
+            cursor: pointer;
         }
         .header {
             position: fixed;
@@ -37,8 +38,9 @@
         }
         .content h2 {
             margin: 0;
-            font-size: 36px;
+            font-size: 48px;
             font-weight: bold;
+            color: #ff1493;
         }
         .heart {
             margin-top: 10px;
@@ -57,40 +59,40 @@
         .instagram-link a:hover {
             text-decoration: underline;
         }
-        .confetti {
+        .hearts {
             position: absolute;
-            bottom: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             overflow: hidden;
             z-index: 0;
-            opacity: 0;
-            transition: opacity 1s;
         }
-        .confetti.show {
-            opacity: 1;
-        }
-        .confetti .piece {
+        .heart-piece {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #f00;
+            width: 30px;
+            height: 30px;
+            background: red;
             opacity: 0.8;
-            border-radius: 50%;
-            animation: confetti 5s;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: float 5s ease-in-out infinite;
         }
-        @keyframes confetti {
-            0% { transform: translateY(100vh); }
-            100% { transform: translateY(-100vh); }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+            }
+            50% {
+                transform: translateY(50vh) scale(1);
+            }
+            100% {
+                transform: translateY(-100vh) scale(0.5);
+            }
         }
         .confetti-start {
             position: fixed;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            background: #007bff;
+            background: #ff69b4;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -99,11 +101,11 @@
             font-size: 16px;
         }
         .confetti-start:hover {
-            background: #0056b3;
+            background: #ff1493;
         }
     </style>
 </head>
-<body>
+<body onclick="createHearts(event)">
     <div class="header">
         <h1>by AldaBaylam</h1>
     </div>
@@ -116,32 +118,25 @@
             </svg>
         </div>
     </div>
-    <button class="confetti-start" onclick="startConfetti()">Konfeti Patlat</button>
-    <div class="confetti" id="confetti"></div>
-
     <div class="instagram-link">
         <a href="https://www.instagram.com/ardaa.b7?igsh=MTJucW05Mnlma3I4MQ==" target="_blank">Instagram</a>
     </div>
+    <div class="hearts" id="hearts"></div>
 
     <script>
-        function startConfetti() {
-            const confettiContainer = document.getElementById('confetti');
-            confettiContainer.innerHTML = ''; // Clear previous confetti
-            confettiContainer.classList.add('show');
-            for (let i = 0; i < 200; i++) { // Increased the number of confetti pieces
-                const piece = document.createElement('div');
-                piece.className = 'piece';
-                piece.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
-                piece.style.left = `${Math.random() * 100}%`;
-                piece.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                piece.style.animationDelay = `${Math.random() * 3}s`;
-                confettiContainer.appendChild(piece);
-            }
+        function createHearts(event) {
+            const heartsContainer = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart-piece';
+            heart.style.left = `${event.clientX - 15}px`;
+            heart.style.top = `${event.clientY - 15}px`;
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            heartsContainer.appendChild(heart);
 
-            // Fade out confetti after 7 seconds
+            // Remove heart after animation
             setTimeout(() => {
-                confettiContainer.classList.remove('show');
-            }, 7000);
+                heart.remove();
+            }, 6000);
         }
     </script>
 </body>
